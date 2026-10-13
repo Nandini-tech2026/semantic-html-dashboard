@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enterprise Dashboard</title>
+  <meta name="description" content="Accessible enterprise dashboard built with semantic HTML5">
+  <style>
+    :root{--bg:#f6f7f9;--surface:#fff;--text:#1b2430;--muted:#5a6675;--brand:#0b5c8a;--brand-dark:#07405f;--line:#d8dde4;--danger:#b3261e}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--text);background:var(--bg);line-height:1.5;min-height:100vh;display:grid;grid-template-columns:230px 1fr;grid-template-rows:auto 1fr auto;grid-template-areas:"head head" "side main" "foot foot"}
+    .skip-link{position:absolute;left:-999px;top:0;background:#000;color:#fff;padding:.5rem 1rem;z-index:10}
+    .skip-link:focus{left:0}
+    :focus-visible{outline:3px solid #f2a900;outline-offset:2px}
+    .site-header{grid-area:head;background:var(--brand-dark);color:#fff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1.25rem}
+    .site-header h1{font-size:1.25rem;margin:0}
+    .site-nav ul{list-style:none;display:flex;gap:.25rem;margin:0;padding:0;flex-wrap:wrap}
+    .site-nav a{color:#fff;text-decoration:none;padding:.4rem .8rem;border-radius:4px;display:block}
+    .site-nav a:hover{background:rgba(255,255,255,.15)}
+    .sidebar{grid-area:side;background:var(--surface);border-right:1px solid var(--line);padding:1.25rem}
+    .sidebar h2{font-size:1rem;margin-top:0}
+    .sidebar ul{list-style:none;padding:0;margin:0 0 1.5rem}
+    .sidebar a{color:var(--brand);display:block;padding:.3rem 0}
+    main{grid-area:main;padding:1.5rem;min-width:0}
+    section,article{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1.25rem;margin-bottom:1.25rem}
+    h2{margin-top:0}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+    .cards article{margin:0}
+    .cards p{font-size:2rem;font-weight:700;margin:.25rem 0 0}
+    .table-wrap{overflow-x:auto}
+    table{border-collapse:collapse;width:100%;min-width:560px}
+    caption{text-align:left;font-weight:600;padding-bottom:.5rem}
+    th,td{border-bottom:1px solid var(--line);padding:.6rem;text-align:left}
+    thead th{background:#eaf1f6}
+    .btn{font:inherit;background:var(--brand);color:#fff;border:0;border-radius:4px;padding:.55rem 1rem;cursor:pointer}
+    .btn:hover{background:var(--brand-dark)}
+    .btn-secondary{background:#fff;color:var(--brand);border:1px solid var(--brand)}
+    form fieldset{border:1px solid var(--line);border-radius:6px;margin:0 0 1.25rem;padding:1rem}
+    legend{font-weight:600;padding:0 .4rem}
+    .field{margin-bottom:1rem;display:flex;flex-direction:column;gap:.25rem}
+    .field label{font-weight:600}
+    .hint{font-size:.875rem;color:var(--muted)}
+    input,select,textarea{font:inherit;padding:.5rem;border:1px solid #7b8794;border-radius:4px;width:100%;max-width:420px}
+    input:invalid:not(:placeholder-shown){border-color:var(--danger)}
+    .inline{display:flex;gap:.5rem;align-items:center}
+    .inline input{width:auto}
+    .required{color:var(--danger)}
+    dialog{border:0;border-radius:8px;padding:1.5rem;max-width:460px;width:92%}
+    dialog::backdrop{background:rgba(0,0,0,.55)}
+    .dialog-actions{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem}
+    .site-footer{grid-area:foot;background:#e7ebf0;padding:1rem 1.25rem;text-align:center;color:var(--muted)}
+    .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    @media(max-width:760px){body{grid-template-columns:1fr;grid-template-areas:"head" "side" "main" "foot"}.sidebar{border-right:0;border-bottom:1px solid var(--line)}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <h1>Enterprise Dashboard</h1>
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#summary">Overview</a></li>
+        <li><a href="#records">Students</a></li>
+        <li><a href="#profile-form">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <aside class="sidebar" aria-label="Sidebar">
+    <h2>Quick links</h2>
+    <nav aria-label="Secondary">
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#records">Records</a></li>
+        <li><a href="#profile-form">Profile form</a></li>
+      </ul>
+    </nav>
+    <h2>Help</h2>
+    <p class="hint">Use Tab to move and Esc to close dialogs.</p>
+  </aside>
+
+  <main id="main-content">
+    <section id="summary" aria-labelledby="summary-title">
+      <h2 id="summary-title">Summary</h2>
+      <div class="cards">
+        <article aria-labelledby="c1"><h3 id="c1">Active students</h3><p>1,248</p></article>
+        <article aria-labelledby="c2"><h3 id="c2">Courses</h3><p>36</p></article>
+        <article aria-labelledby="c3"><h3 id="c3">Completion rate</h3><p>82%</p></article>
+      </div>
+    </section>
+
+    <section id="records" aria-labelledby="records-title">
+      <h2 id="records-title">Student records</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Enrolled students and their progress</caption>
+          <thead>
+            <tr>
+              <th scope="col">ID</th><th scope="col">Name</th>
+              <th scope="col">Course</th><th scope="col">Progress</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">101</th><td>Asha Verma</td><td>Full Stack Web Development</td><td>75%</td>
+              <td><button type="button" class="btn btn-secondary" data-open-modal="delete-dialog">Remove</button></td></tr>
+            <tr><th scope="row">102</th><td>Ravi Kumar</td><td>Data Analytics</td><td>40%</td>
+              <td><button type="button" class="btn btn-secondary" data-open-modal="delete-dialog">Remove</button></td></tr>
+            <tr><th scope="row">103</th><td>Meera Nair</td><td>UI/UX Design</td><td>92%</td>
+              <td><button type="button" class="btn btn-secondary" data-open-modal="delete-dialog">Remove</button></td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="5">Total students: 3</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <section id="profile-form" aria-labelledby="form-title">
+      <h2 id="form-title">Student profile</h2>
+      <p class="hint">Fields marked <span class="required" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Personal details</legend>
+          <div class="field">
+            <label for="fullname">Full name <span class="required" aria-hidden="true">*</span></label>
+            <input type="text" id="fullname" name="fullname" required minlength="2" maxlength="60" autocomplete="name" aria-describedby="name-hint">
+            <span id="name-hint" class="hint">Enter your name as on your ID.</span>
+          </div>
+          <div class="field">
+            <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" inputmode="numeric" placeholder="10 digits" aria-describedby="phone-hint">
+            <span id="phone-hint" class="hint">Digits only, no spaces.</span>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Course preferences</legend>
+          <div class="field">
+            <label for="course">Course <span class="required" aria-hidden="true">*</span></label>
+            <select id="course" name="course" required>
+              <option value="">Select a course</option>
+              <option value="fullstack">Full Stack Web Development</option>
+              <option value="data">Data Analytics</option>
+              <option value="design">UI/UX Design</option>
+            </select>
+          </div>
+          <fieldset>
+            <legend>Learning mode</legend>
+            <div class="inline"><input type="radio" id="m-online" name="mode" value="online" checked><label for="m-online">Online</label></div>
+            <div class="inline"><input type="radio" id="m-offline" name="mode" value="offline"><label for="m-offline">In person</label></div>
+          </fieldset>
+          <div class="field">
+            <label for="bio">About you</label>
+            <textarea id="bio" name="bio" rows="4" maxlength="300"></textarea>
+          </div>
+          <div class="inline">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">I agree to the terms and conditions <span class="required" aria-hidden="true">*</span></label>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn">Save profile</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+      </form>
+    </section>
+
+    <dialog id="delete-dialog" aria-labelledby="dlg-title" aria-describedby="dlg-desc">
+      <h2 id="dlg-title">Remove student?</h2>
+      <p id="dlg-desc">This will remove the student from the course. You cannot undo this.</p>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
+        <button type="button" class="btn" data-close-modal>Remove</button>
+      </div>
+    </dialog>
+  </main>
+
+  <footer class="site-footer">
+    <p><small>&copy; 2026 Enterprise Dashboard. All rights reserved.</small></p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-open-modal]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var dlg = document.getElementById(btn.dataset.openModal);
+        if (dlg && dlg.showModal) { dlg.showModal(); }
+      });
+    });
+    document.querySelectorAll('[data-close-modal]').forEach(function (btn) {
+      btn.addEventListener('click', function () { btn.closest('dialog').close(); });
+    });
+  </script>
+</body>
+  </html>
